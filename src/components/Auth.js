@@ -16,7 +16,7 @@ const Auth = (props) => (
             >
                 LOG OUT
             </button>
-            {props.children}
+            
         </div>
         :
         <div>

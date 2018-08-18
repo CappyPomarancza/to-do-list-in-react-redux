@@ -7,7 +7,9 @@ const Tasks =(props) =>(
             props._isTasksAreLoading ? 
             'LOADING TASKS.....'
             :
-            props._tasks 
+            props._tasks ? Object.entries(props._tasks).map(e => Object.assign(e,{ 0: + e[0]}))
+            :
+            'NO TASKS!'
 
         }
     </div>
