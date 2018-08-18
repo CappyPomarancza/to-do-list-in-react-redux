@@ -1,5 +1,5 @@
 import { auth as firebaseAuth } from '../firebaseConfig'
-
+import { fetchTasksAction } from './tasks'
 
 const EMAIL_CHANGE = 'auth/EMAIL_CHANGE'
 const PASSWORD_CHANGE = 'auth/PASSWORD_CHANGE'
