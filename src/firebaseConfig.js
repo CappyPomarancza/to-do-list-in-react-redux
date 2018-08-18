@@ -1,15 +1,15 @@
 import firebase from 'firebase'
 
 const config = {
-    apiKey: "AIzaSyD480H_Ia0TtfX9oBjOeVXlVhf9iJGxojs",
-    authDomain: "to-do-list-aceb0.firebaseapp.com",
-    databaseURL: "https://to-do-list-aceb0.firebaseio.com",
-    projectId: "to-do-list-aceb0",
-    storageBucket: "to-do-list-aceb0.appspot.com",
-    messagingSenderId: "871541176990"
+    apiKey: "AIzaSyC7jic1on54na1rqXP-np0y4jbFCBm4gb0",
+    authDomain: "todo-e8a15.firebaseapp.com",
+    databaseURL: "https://todo-e8a15.firebaseio.com",
+    projectId: "todo-e8a15",
+    storageBucket: "todo-e8a15.appspot.com",
+    messagingSenderId: "557279665039"
 }
-
 firebase.initializeApp(config)
+
 
 export const auth = firebase.auth()
 export const database = firebase.database()

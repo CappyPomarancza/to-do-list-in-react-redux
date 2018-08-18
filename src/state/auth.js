@@ -25,30 +25,31 @@ export const setTaskAction = (task) => (
     }
 )
 
-export const initAuthStateListening = () => (dispatchEvent, getState)
-firebaseAuth.onAuthStateChanged(task => {
-    dispatchEvent(setTaskAction(task))
-    if(task){
-        dispatchEvent(fetchTasksAction())
-    }else{
+export const initAuthStateListening = () => (dispatch, getState) => {
+    firebaseAuth.onAuthStateChanged(task => {
+        dispatchEvent(setTaskAction(task))
+        if (task) {
+            dispatchEvent(fetchTasksAction())
+        } else {
 
-    }
-})
+        }
+    })
+}
 
 export const logOutAction = () => (dispatch, getState) => {
     firebaseAuth.signOut()
-    .then(()=>console.log('SINGOUT OK'))
-    .catch(()=>console.log('SIGNOUT ERROR'))
+        .then(() => console.log('SINGOUT OK'))
+        .catch(() => console.log('SIGNOUT ERROR'))
 }
 
-export const onLogInClickAction = () => (dispatch, getState) =>{
-const state= getState()
-firebaseAuth.signInWithEmailAndPassword(
-    state.auth.email,
-    state.auth.password
-)
-.then(()=>console.log('LOGIN OK'))
-.catch(()=> console.log('LOGIN ERROR'))
+export const onLogInClickAction = () => (dispatch, getState) => {
+    const state = getState()
+    firebaseAuth.signInWithEmailAndPassword(
+        state.auth.email,
+        state.auth.password
+    )
+        .then(() => console.log('LOGIN OK'))
+        .catch(() => console.log('LOGIN ERROR'))
 }
 
 const initialState = {
@@ -60,20 +61,20 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case EMAIL_CHANGE:
-        return {
-            ...state,
-            email: action.value
-        }
+            return {
+                ...state,
+                email: action.value
+            }
         case PASSWORD_CHANGE:
-        return {
-            ...state,
-            password: action.value
-        }
+            return {
+                ...state,
+                password: action.value
+            }
         case SET_TASK:
-        return {
-            ...state,
-            task: action.task
-        }
+            return {
+                ...state,
+                task: action.task
+            }
         default:
             return state
     }
