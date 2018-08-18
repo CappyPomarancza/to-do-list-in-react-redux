@@ -34,7 +34,7 @@ export const addNewTasksAction = (value) => (
 )
 export const fetchTasksAction = () => (dispatch, getState) =>{
     dispatch(tasksStartedLoadingAction())
-    database.ref('/ToDoList')
+    database.ref('/ToDoList/tasks/')
         .on(
             'value',
             snapshot => {
