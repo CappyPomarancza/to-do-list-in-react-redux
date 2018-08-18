@@ -1,3 +1,6 @@
+import { database } from '../firebaseConfig'
+import { setTaskAction } from './auth';
+
 const SET_TASKS = 'tasks/SET_USERS'
 const TASKS_STARTED_LOADING = 'tasks/TASKS_STARTED_LOADING'
 const TASKS_STOPPED_LOADING = 'tasks/TASKS_STOPPED_LOADING'
@@ -29,6 +32,17 @@ export const addNewTasksAction = (value) => (
         value
     }
 )
+export const fetchTasksAction = () => (dispatchEvent, getState) {
+    dispatch(tasksStartedLoadingAction())
+    database.ref('/tasks')
+        .on(
+            'value',
+            snapshot => {
+                const data = snapshot.val()
+                dispatch(setTaskAction(data))
+                dispatch(tasksStoppedLoadingAction())
+            })
+}
 
 
 const initialState = {
