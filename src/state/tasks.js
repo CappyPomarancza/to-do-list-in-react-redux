@@ -5,6 +5,7 @@ const SET_TASKS = 'tasks/SET_USERS'
 const TASKS_STARTED_LOADING = 'tasks/TASKS_STARTED_LOADING'
 const TASKS_STOPPED_LOADING = 'tasks/TASKS_STOPPED_LOADING'
 const ADD_NEW_TASK = ' tasks/ADD_NEW_TASK'
+const CLEAR_ADDTASKFORM = 'tasks/CLEAR_ADDTASKFORM'
 
 
 export const tasksStartedLoadingAction = () => (
@@ -32,6 +33,11 @@ export const addNewTasksAction = (value) => (
         value
     }
 )
+
+export const clearAddTaskFormAction = () => ({
+    type: CLEAR_ADDTASKFORM
+})
+
 export const fetchTasksAction = () => (dispatch, getState) =>{
     dispatch(tasksStartedLoadingAction())
     database.ref('/to-do-list')
@@ -42,6 +48,17 @@ export const fetchTasksAction = () => (dispatch, getState) =>{
                 dispatch(setTaskAction(data))
                 dispatch(tasksStoppedLoadingAction())
             })
+}
+
+export const addTaskClickAction = () => (dispatch, getState) => {
+    const state = getState()
+
+    database.ref('/to-do-list/task').push({
+        task: state.tasks.task,
+        isComplete: false
+    })
+
+    dispatch(clearAddTaskFormAction())
 }
 
 
