@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Tasks from './views/Tasks';
 import Auth from './components/Auth'
+import NewTaskForm from './views/NewTaskForm';
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <div>
         <Auth />
         <Tasks/>
+
       </div>
     );
   }

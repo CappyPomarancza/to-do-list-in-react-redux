@@ -1,15 +1,26 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import NewTaskForm from './NewTaskForm'
+import {addNewTasksAction} from '../state/tasks'
 
-const Tasks =(props) =>(
+const Tasks = (props) => (
     <div>
         {
-            props._isTasksAreLoading ? 
-            'LOADING TASKS.....'
-            :
-            props._tasks ? Object.entries(props._tasks).map(e => Object.assign(e,{ 0: + e[0]}))
-            :
-            'NO TASKS!'
+            props._isTasksAreLoading ?
+                'LOADING TASKS.....'
+                :
+              
+                    props._tasks ? Array.from(props._tasks).map(task => (
+                        <div>
+                            {task}
+                        </div>
+                    ))
+                    &&   <NewTaskForm
+                    onAddNewTaskClick={props._onAddNewTaskClick}
+                    textValue={props._textValue}
+                />
+                    :
+                    'NO TASKS!'
 
         }
     </div>
@@ -18,11 +29,12 @@ const Tasks =(props) =>(
 
 const mapStateToProps = state => ({
     _tasks: state.auth.task,
-    _isTasksAreLoading: state.tasks.isTasksAreLoading
+    _isTasksAreLoading: state.tasks.isTasksAreLoading,
+    _textValue: state.tasks.text
 })
 
 const mapDispatchToProps = dispatch => ({
-
+    _onAddNewTaskClick: () => dispatch(addNewTasksAction())
 })
 
 export default connect(
