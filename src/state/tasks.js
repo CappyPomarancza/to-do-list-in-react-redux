@@ -5,7 +5,7 @@ const SET_TASKS = 'tasks/SET_USERS'
 const TASKS_STARTED_LOADING = 'tasks/TASKS_STARTED_LOADING'
 const TASKS_STOPPED_LOADING = 'tasks/TASKS_STOPPED_LOADING'
 const ADD_NEW_TASK = ' tasks/ADD_NEW_TASK'
-const CLEAR_ADDTASKFORM = 'tasks/CLEAR_ADDTASKFORM'
+const CLEAR_ADDTASKFORM = 'newTask/CLEAR_ADDTASKFORM'
 
 
 export const tasksStartedLoadingAction = () => (
@@ -34,9 +34,7 @@ export const addNewTasksAction = (value) => (
     }
 )
 
-export const clearAddTaskFormAction = () => ({
-    type: CLEAR_ADDTASKFORM
-})
+
 
 export const fetchTasksAction = () => (dispatch, getState) =>{
     dispatch(tasksStartedLoadingAction())
@@ -50,11 +48,22 @@ export const fetchTasksAction = () => (dispatch, getState) =>{
             })
 }
 
+
+
+
+
+
+
+
+export const clearAddTaskFormAction = () => ({
+    type: CLEAR_ADDTASKFORM
+})
+
 export const addTaskClickAction = () => (dispatch, getState) => {
     const state = getState()
 
-    database.ref('/to-do-list/task').push({
-        task: state.tasks.task,
+    database.ref('/to-do-list').push({
+        task: state.tasks.text,
         isComplete: false
     })
 
@@ -63,9 +72,10 @@ export const addTaskClickAction = () => (dispatch, getState) => {
 
 
 const initialState = {
+    text: 'taki mamy klimat',
     tasks: null,
-    isTasksAreLoading: false,
-    text: ''
+    isTasksAreLoading: false
+    
 }
 
 
@@ -92,6 +102,11 @@ export default (state = initialState, action) => {
                 ...state,
                 isTasksAreLoading: false
             }
+            case CLEAR_ADDTASKFORM:
+        return {
+            ...state,
+            ...initialState
+        }
         default:
             return state
     }

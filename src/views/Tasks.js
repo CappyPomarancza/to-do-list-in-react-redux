@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import NewTaskForm from './NewTaskForm'
 import {addNewTasksAction} from '../state/tasks'
 
+
 const Tasks = (props) => (
     <div>
         {
@@ -10,9 +11,9 @@ const Tasks = (props) => (
                 'LOADING TASKS.....'
                 :
               
-                    props._tasks ? Array.from(props._tasks).map(task => (
+                    props._tasks ? Array.from(props._tasks).map(el => (
                         <div>
-                            {task}
+                           {el}
                         </div>
                     ))
                     &&   <NewTaskForm
@@ -28,7 +29,7 @@ const Tasks = (props) => (
 
 
 const mapStateToProps = state => ({
-    _tasks: state.auth.task,
+    _tasks: state.auth.user,
     _isTasksAreLoading: state.tasks.isTasksAreLoading,
     _textValue: state.tasks.text
 })

@@ -3,7 +3,7 @@ import { fetchTasksAction } from './tasks'
 
 const EMAIL_CHANGE = 'auth/EMAIL_CHANGE'
 const PASSWORD_CHANGE = 'auth/PASSWORD_CHANGE'
-const SET_TASK = 'auth/SET_TASK'
+const SET_USER = 'auth/SET_TASK'
 
 export const onEmailChangeAction = (value) => (
     {
@@ -18,10 +18,10 @@ export const onPasswordChangeAction = (value) => (
         value
     }
 )
-export const setTaskAction = (task) => (
+export const setTaskAction = (user) => (
     {
-        type: SET_TASK,
-        task
+        type: SET_USER,
+        user
     }
 )
 
@@ -55,7 +55,7 @@ export const onLogInClickAction = () => (dispatch, getState) => {
 const initialState = {
     email: '',
     password: '',
-    tasks: null,
+    user: null,
 }
 
 export default (state = initialState, action) => {
@@ -70,10 +70,10 @@ export default (state = initialState, action) => {
                 ...state,
                 password: action.value
             }
-        case SET_TASK:
+        case SET_USER:
             return {
                 ...state,
-                task: action.task
+                user: action.user
             }
         default:
             return state
